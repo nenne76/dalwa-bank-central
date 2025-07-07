@@ -172,9 +172,6 @@ export const LoginForm = ({ onLogin, onClose }: LoginFormProps) => {
                     onChange={(e) => setRegisterEmail(e.target.value)}
                     required
                   />
-                  <p className="text-xs text-muted-foreground">
-                    Use dalwa.uad@gmail.com for admin access
-                  </p>
                 </div>
                 
                 <div className="space-y-2">

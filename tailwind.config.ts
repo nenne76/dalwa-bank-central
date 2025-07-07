@@ -70,6 +70,20 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-card': 'var(--gradient-card)',
+				'gradient-glass': 'var(--gradient-glass)',
+				'gradient-feature': 'var(--gradient-feature)'
+			},
+			boxShadow: {
+				'banking': 'var(--shadow-banking)',
+				'card': 'var(--shadow-card)',
+				'elevation': 'var(--shadow-elevation)',
+				'glow': 'var(--shadow-glow)',
+				'feature': 'var(--shadow-feature)'
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

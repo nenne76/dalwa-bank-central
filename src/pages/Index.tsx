@@ -121,23 +121,32 @@ const Index = () => {
               <p className="text-xl text-muted-foreground mb-8">
                 Your trusted banking partner for secure online transactions and financial management.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div className="p-6 rounded-lg bg-gradient-card border shadow-card">
-                  <h3 className="text-xl font-semibold mb-3 text-banking-blue">Secure Transactions</h3>
-                  <p className="text-muted-foreground">
-                    Register and manage your financial transactions with bank-level security.
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                <div className="group p-8 rounded-2xl bg-gradient-feature border border-banking-blue/20 shadow-feature hover:shadow-glow transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-12 h-12 bg-banking-blue/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-banking-blue/20 transition-colors">
+                    <div className="w-6 h-6 bg-banking-blue rounded-md opacity-80"></div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 text-banking-blue">Secure Transactions</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Register and manage your financial transactions with bank-level security and encryption.
                   </p>
                 </div>
-                <div className="p-6 rounded-lg bg-gradient-card border shadow-card">
-                  <h3 className="text-xl font-semibold mb-3 text-banking-green">Real-time Dashboard</h3>
-                  <p className="text-muted-foreground">
-                    Track your balance and transaction history with our intuitive dashboard.
+                <div className="group p-8 rounded-2xl bg-gradient-feature border border-banking-green/20 shadow-feature hover:shadow-glow transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-12 h-12 bg-banking-green/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-banking-green/20 transition-colors">
+                    <div className="w-6 h-6 bg-banking-green rounded-md opacity-80"></div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 text-banking-green">Real-time Dashboard</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Track your balance and transaction history with our intuitive, real-time dashboard.
                   </p>
                 </div>
-                <div className="p-6 rounded-lg bg-gradient-card border shadow-card">
-                  <h3 className="text-xl font-semibold mb-3 text-banking-trust">Admin Control</h3>
-                  <p className="text-muted-foreground">
-                    Complete administrative control for authorized personnel.
+                <div className="group p-8 rounded-2xl bg-gradient-feature border border-banking-trust/20 shadow-feature hover:shadow-glow transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-12 h-12 bg-banking-trust/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-banking-trust/20 transition-colors">
+                    <div className="w-6 h-6 bg-banking-trust rounded-md opacity-80"></div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 text-banking-trust">Admin Control</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Complete administrative control with advanced management tools for authorized personnel.
                   </p>
                 </div>
               </div>
