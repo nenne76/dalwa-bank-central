@@ -6,28 +6,24 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Lock, Mail, User } from "lucide-react";
-
-interface User {
-  email: string;
-  name: string;
-  isAdmin: boolean;
-}
+import { supabase } from "@/integrations/supabase/client";
 
 interface LoginFormProps {
-  onLogin: (user: User) => void;
   onClose: () => void;
 }
 
-export const LoginForm = ({ onLogin, onClose }: LoginFormProps) => {
+export const LoginForm = ({ onClose }: LoginFormProps) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerName, setRegisterName] = useState("");
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     
     if (!loginEmail || !loginPassword) {
       toast({
@@ -35,27 +31,37 @@ export const LoginForm = ({ onLogin, onClose }: LoginFormProps) => {
         description: "Please fill in all fields",
         variant: "destructive"
       });
+      setLoading(false);
       return;
     }
 
-    // Simple demo logic - check if email contains dalwa.uad@gmail.com for admin
-    const isAdmin = loginEmail.toLowerCase().includes("dalwa.uad@gmail.com");
-    
-    const user: User = {
-      email: loginEmail,
-      name: loginEmail.split('@')[0] || "User",
-      isAdmin
-    };
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: loginEmail,
+        password: loginPassword,
+      });
 
-    onLogin(user);
-    toast({
-      title: "Login Successful",
-      description: `Welcome back${isAdmin ? ', Admin' : ''}!`,
-    });
+      if (error) throw error;
+
+      toast({
+        title: "Login Successful",
+        description: "Welcome back!",
+      });
+      onClose();
+    } catch (error: any) {
+      toast({
+        title: "Login Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     
     if (!registerEmail || !registerPassword || !registerName) {
       toast({
@@ -63,23 +69,38 @@ export const LoginForm = ({ onLogin, onClose }: LoginFormProps) => {
         description: "Please fill in all fields",
         variant: "destructive"
       });
+      setLoading(false);
       return;
     }
 
-    // Simple demo logic - check if email contains dalwa.uad@gmail.com for admin
-    const isAdmin = registerEmail.toLowerCase().includes("dalwa.uad@gmail.com");
-    
-    const user: User = {
-      email: registerEmail,
-      name: registerName,
-      isAdmin
-    };
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: registerEmail,
+        password: registerPassword,
+        options: {
+          data: {
+            full_name: registerName,
+            email: registerEmail,
+          }
+        }
+      });
 
-    onLogin(user);
-    toast({
-      title: "Registration Successful",
-      description: `Welcome to Dalwa Bank${isAdmin ? ', Admin' : ''}!`,
-    });
+      if (error) throw error;
+
+      toast({
+        title: "Registration Successful",
+        description: "Welcome to Dalwa Bank! Please check your email to verify your account.",
+      });
+      onClose();
+    } catch (error: any) {
+      toast({
+        title: "Registration Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
